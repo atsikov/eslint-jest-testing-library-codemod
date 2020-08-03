@@ -4,7 +4,8 @@
 
 ## Usage
 `yarn transform <path to folder>`
-Codemod will pick all js,jsx,ts,tsx files, ignoring node_modules. All [jscodeshift](https://github.com/facebook/jscodeshift) params could be passed as well.
+
+Codemod will pick all js, jsx, ts, tsx files, ignoring `node_modules`. [jscodeshift](https://github.com/facebook/jscodeshift) params could be passed as well.
 
 ## Fixers
 
