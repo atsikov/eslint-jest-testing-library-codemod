@@ -10,7 +10,7 @@ import prettier from 'prettier'
 const JEST_TRUTHY_ASSERTIONS = [
   '.not.toBeNull',
   '.toBeTruthy',
-  '.not.toBeTruthy',
+  '.not.toBeFalsy',
   '.toBeInTheDocument',
   '.toBeDefined',
 ]
