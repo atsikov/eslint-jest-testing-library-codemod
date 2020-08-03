@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Use getBy in truthy queries 1`] = `
+"// @ts-nocheck
+it('test', () => {
+  expect(getByTestId('id')).not.toBeNull()
+  expect(getByText('id')).toBeTruthy()
+  expect(getByRole('id')).toBeInTheDocument()
+  expect(getByLabelText('id')).toBeDefined()
+  expect(screen.getByTestId('id')).not.toBeNull()
+  expect(screen.getByText('id')).toBeTruthy()
+  expect(screen.getByRole('id')).toBeInTheDocument()
+  expect(screen.getByLabelText('id')).toBeDefined()
+  expect(a.b.getByTestId('id')).not.toBeNull()
+  expect(a.b.getByText('id')).toBeTruthy()
+  expect(a.b.getByRole('id')).toBeInTheDocument()
+  expect(a.b.getByLabelText('id')).toBeDefined()
+})"
+`;
+
+exports[`Use queryBy in falsy queries 1`] = `
+"// @ts-nocheck
+it('test', () => {
+  expect(queryByTestId('id')).toBeNull()
+  expect(queryByText('id')).toBeFalsy()
+  expect(queryByRole('id')).not.toBeInTheDocument()
+  expect(queryByLabelText('id')).not.toBeDefined()
+  expect(screen.queryByTestId('id')).toBeNull()
+  expect(screen.queryByText('id')).toBeFalsy()
+  expect(screen.queryByRole('id')).not.toBeInTheDocument()
+  expect(screen.queryByLabelText('id')).not.toBeDefined()
+  expect(a.b.queryByTestId('id')).toBeNull()
+  expect(a.b.queryByText('id')).toBeFalsy()
+  expect(a.b.queryByRole('id')).not.toBeInTheDocument()
+  expect(a.b.queryByLabelText('id')).not.toBeDefined()
+})"
+`;

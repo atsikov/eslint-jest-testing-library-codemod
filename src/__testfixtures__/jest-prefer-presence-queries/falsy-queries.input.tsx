@@ -1,0 +1,15 @@
+// @ts-nocheck
+it('test', () => {
+  expect(getByTestId('id')).toBeNull()
+  expect(getByText('id')).toBeFalsy()
+  expect(getByRole('id')).not.toBeInTheDocument()
+  expect(getByLabelText('id')).not.toBeDefined()
+  expect(screen.getByTestId('id')).toBeNull()
+  expect(screen.getByText('id')).toBeFalsy()
+  expect(screen.getByRole('id')).not.toBeInTheDocument()
+  expect(screen.getByLabelText('id')).not.toBeDefined()
+  expect(a.b.getByTestId('id')).toBeNull()
+  expect(a.b.getByText('id')).toBeFalsy()
+  expect(a.b.getByRole('id')).not.toBeInTheDocument()
+  expect(a.b.getByLabelText('id')).not.toBeDefined()
+})

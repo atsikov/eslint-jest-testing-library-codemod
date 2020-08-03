@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add both screen and within if needed 1`] = `
+"// @ts-nocheck
+import React from 'react'
+import { screen, within } from '@testing-library/react'
+
+it('test', () => {
+  const { container } = render(<A />)
+  expect(within(container).getByText('text', 'blabla')).toBeInTheDocument()
+  expect(screen.getByText('text')).toBeInTheDocument()
+})"
+`;
+
+exports[`Add rtl import after react 1`] = `
+"// @ts-nocheck
+import React from 'react'
+
+import { screen } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+})"
+`;
+
+exports[`Add screen to existing rtl import 1`] = `
+"// @ts-nocheck
+import { within, screen } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).not.toBeNull()
+})"
+`;
+
+exports[`Handled named destructure 1`] = `
+"import { screen } from '@testing-library/react'
+// @ts-nocheck
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).not.toBeNull()
+})"
+`;
+
+exports[`Handled named imports 1`] = `
+"import { screen } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).not.toBeNull()
+})"
+`;
+
+exports[`Keep non empty destructure 1`] = `
+"import { screen } from '@testing-library/react'
+// @ts-nocheck
+it('test', () => {
+  const { container } = render(<div />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+})"
+`;
+
+exports[`Keep non query methods imports 1`] = `
+"// @ts-nocheck
+import { screen, within } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+})"
+`;
+
+exports[`Keep object properties with rtl query names 1`] = `
+"// @ts-nocheck
+import React from 'react'
+
+it('test', () => {
+  expect(obj.getByText('textA')).not.toBeNull()
+})"
+`;
+
+exports[`Keep render result var if other props than queries used 1`] = `
+"// @ts-nocheck
+import React from 'react'
+
+import { screen } from '@testing-library/react'
+
+it('test', () => {
+  const rendered = render(<A />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+  rendered.foo
+})"
+`;
+
+exports[`Keep shadowed variables 1`] = `
+"// @ts-nocheck
+import React from 'react'
+
+import { screen } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+
+  arr.forEach(() => {
+    const rendered = render(<A />)
+    expect(rendered.foo('text')).toBeInTheDocument()
+  })
+})"
+`;
+
+exports[`Remove destructure and unused global var 1`] = `
+"import { screen } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+})"
+`;
+
+exports[`Remove destructure and unused local var 1`] = `
+"import { screen } from '@testing-library/react'
+// @ts-nocheck
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+})"
+`;
+
+exports[`Remove empty destructure 1`] = `
+"import { screen } from '@testing-library/react'
+// @ts-nocheck
+it('test', () => {
+  render({ foo: true })
+
+  expect(screen.getByTestId('foo')).toBeInTheDocument()
+})"
+`;
+
+exports[`Replace render result value usages 1`] = `
+"// @ts-nocheck
+import React from 'react'
+
+import { screen } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText('text')).toBeInTheDocument()
+})"
+`;
+
+exports[`Transform query with more than one parameter to within 1`] = `
+"// @ts-nocheck
+import React from 'react'
+import { within } from '@testing-library/react'
+
+it('test', () => {
+  const { container } = render(<A />)
+  expect(within(container).getByText('text', 'blabla')).toBeInTheDocument()
+})"
+`;
