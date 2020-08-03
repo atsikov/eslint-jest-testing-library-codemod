@@ -1,6 +1,6 @@
 import { Transform } from 'jscodeshift'
 
-import transformPreferScreen from './jest-prefer-screen'
+import transformPreferScreen from './jest-prefer-screen-queries'
 import transformPreferPresenceQueries from './jest-prefer-presence-queries'
 import transformNoManualCleanup from './jest-no-manual-cleanup'
 import format from './format'
