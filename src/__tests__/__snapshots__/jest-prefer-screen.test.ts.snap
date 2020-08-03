@@ -7,7 +7,7 @@ import { screen, within } from '@testing-library/react'
 
 it('test', () => {
   const { container } = render(<A />)
-  expect(within(container).getByText('text', 'blabla')).toBeInTheDocument()
+  expect(within(container).getByText('text')).toBeInTheDocument()
   expect(screen.getByText('text')).toBeInTheDocument()
 })"
 `;
@@ -49,6 +49,19 @@ exports[`Handled named imports 1`] = `
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).not.toBeNull()
+})"
+`;
+
+exports[`Keep multiple parameters if second is not string or regexp 1`] = `
+"// @ts-nocheck
+import React from 'react'
+
+import { screen } from '@testing-library/react'
+
+it('test', () => {
+  render(<A />)
+  expect(screen.getByText(container, options)).toBeInTheDocument()
+  expect(screen.getByText(container, undefined, options)).toBeInTheDocument()
 })"
 `;
 
@@ -157,6 +170,7 @@ import { within } from '@testing-library/react'
 
 it('test', () => {
   const { container } = render(<A />)
-  expect(within(container).getByText('text', 'blabla')).toBeInTheDocument()
+  expect(within(container).getByText('text')).toBeInTheDocument()
+  expect(within(container).getByText(/text/)).toBeInTheDocument()
 })"
 `;

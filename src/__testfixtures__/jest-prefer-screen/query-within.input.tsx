@@ -4,5 +4,6 @@ import { getByText } from '@testing-library/react'
 
 it('test', () => {
   const { container } = render(<A />)
-  expect(getByText(container, 'text', 'blabla')).toBeInTheDocument()
+  expect(getByText(container, 'text')).toBeInTheDocument()
+  expect(getByText(container, /text/)).toBeInTheDocument()
 })

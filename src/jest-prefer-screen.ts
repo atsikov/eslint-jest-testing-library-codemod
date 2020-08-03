@@ -253,7 +253,14 @@ const transform: Transform = (fileInfo, api, options: TransformOptions) => {
     .filter(path => RTL_QUERY_METHODS.includes(
       ((path.value.callee as MemberExpression).property as Identifier).name,
     ))
-    .filter(path => path.value.arguments.length > 1)
+    .filter(path => path.value.arguments.length === 2)
+    .filter(path => {
+      // Some screen.* methods accepts more than one argument
+      // but these are objects or undefined
+      const secondArgument = path.value.arguments[1]
+      return j(secondArgument).isOfType(j.StringLiteral)
+        || j(secondArgument).isOfType(j.RegExpLiteral)
+    })
     .forEach(path => {
       const methodName = ((path.value.callee as MemberExpression).property as Identifier).name
       const args = path.value.arguments

@@ -101,6 +101,13 @@ snapshotTest(
   getInput('jest-prefer-screen/screen-and-within'),
   'Add both screen and within if needed',
 )
+snapshotTest(
+  transform,
+  { memberExpressions: true },
+  getInput('jest-prefer-screen/keep-query-options'),
+  'Keep multiple parameters if second is not string or regexp',
+)
+
 
 // memberExpressions: true
 snapshotTest(
