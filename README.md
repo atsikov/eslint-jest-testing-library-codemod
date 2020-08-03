@@ -26,6 +26,18 @@ render(<div />)
 expect(screen.getByText('text')).not.toBeNull()
 ```
 
+* Replace query taken from `render()` result, which was assigned to var
+```
+const rendered = render(<div />)
+const { getByText } = rendered
+expect(getByText('text')).not.toBeNull()
+```
+is transformed to
+```
+render(<div />)
+expect(screen.getByText('text')).not.toBeNull()
+```
+
 * Handle globally imported queries
 ```
 import { getByText as gBT, screen } from '@testing-library/react'
@@ -44,7 +56,6 @@ expect(within(child).getByText('text')).not.toBeNull()
 * Replace query taken from variable where `render()` result was assigned, removing this var when it is not referenced (with `memberExpression: true` option)
 ```
 const rendered = render(<div />)
-const { getByText } = rendered
 expect(rendered.getByText('text')).not.toBeNull()
 ```
 is transformed to
@@ -57,7 +68,6 @@ Handles variables from upper scope
 let rendered
 it('test', () => {
   rendered = render(<div />)
-  const { getByText } = rendered
   expect(rendered.getByText('text')).not.toBeNull()
 })
 ```
@@ -73,7 +83,6 @@ Unused type will also be removed
 import { RenderResult } from '@testing-library/react'
 let rendered
 rendered = render(<div />)
-const { getByText } = rendered
 expect(rendered.getByText('text')).not.toBeNull()
 ```
 is transformed to
