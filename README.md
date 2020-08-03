@@ -21,7 +21,22 @@ render(<div />)
 expect(screen.getByText('text')).not.toBeNull()
 ```
 
-* Replace query taken from variable where `render()` result was assigned, removing this var when it is not referenced
+* Handle globally imported queries
+```
+import { getByText as gBT, screen } from '@testing-library/react'
+render(<div />)
+const child = screen.getByText('child')
+expect(gBT(child, 'text')).not.toBeNull()
+```
+is transformed to
+```
+import { screen, within } from '@testing-library/react'
+render(<div />)
+const child = screen.getByText('child')
+expect(within(child).getByText('text')).not.toBeNull()
+```
+
+* Replace query taken from variable where `render()` result was assigned, removing this var when it is not referenced (with `memberExpression: true` option)
 ```
 const rendered = render(<div />)
 const { getByText } = rendered
@@ -62,20 +77,6 @@ import { screen } from '@testing-library/react'
 render(<div />)
 expect(screen.getByText('text')).not.toBeNull()
 ```
-* Handle globally imported queries
-```
-import { getByText as gBT, screen } from '@testing-library/react'
-render(<div />)
-const child = screen.getByText('child')
-expect(gBT(child, 'text')).not.toBeNull()
-```
-is transformed to
-```
-import { screen, within } from '@testing-library/react'
-render(<div />)
-const child = screen.getByText('child')
-expect(within(child).getByText('text')).not.toBeNull()
-```
 
 ### no-manual-cleanup
 
@@ -96,6 +97,7 @@ it('test', () => {
   render(<div />)
 })
 ```
+
 * Removes jest lifecycle methods in case `cleanup` was the only call
 ```
 import { cleanup, render } from '@testing-library/react'
@@ -116,6 +118,7 @@ it('test', () => {
   render(<div />)
 })
 ```
+
 * Handles case when `cleanup` is passed to jest lifecycle method as a callback
 ```
 import { cleanup, render } from '@testing-library/react'
