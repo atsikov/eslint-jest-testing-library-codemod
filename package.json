@@ -1,4 +1,7 @@
 {
+  "name": "eslint-jest-testing-library-codemod",
+  "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
     "test": "jest",
     "transform": "jscodeshift --parser=tsx --memberExpressions=true --verbose=2 -t=./src/transform.ts --extensions=js,jsx,ts,tsx --ignore-pattern='../**/node_modules/**' --ignore-pattern='**/node_modules/**'"
