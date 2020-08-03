@@ -5,8 +5,9 @@ import {
   MemberExpression,
   ImportDeclaration,
   Options,
+  CallExpression,
+  ASTPath,
 } from 'jscodeshift'
-import prettier from 'prettier'
 import {
   getParentScopePath,
   replaceMethodNames,
@@ -213,67 +214,30 @@ const transform: Transform = (fileInfo, api, options: TransformOptions) => {
 
       const transformedNodes = root
         .find(j.Identifier, { name: localName })
-        .filter(idPath => {
-          return j(getDeclarationScopePath(j, idPath, localName)).isOfType(j.Program)
+        .filter(idPath => j(getDeclarationScopePath(j, idPath, localName)).isOfType(j.Program))
+        .filter(idPath => j(idPath.parentPath.value).isOfType(j.CallExpression))
+        .forEach(idPath => {
+          const parentCallExpression = idPath.parentPath as ASTPath<CallExpression>
+          const args = parentCallExpression.value.arguments
+          j(parentCallExpression).replaceWith(
+            j.callExpression(
+              j.memberExpression(
+                j.callExpression(j.identifier(WITHIN_METHOD_NAME), [args[0]]),
+                j.identifier(importedName),
+              ),
+              args.slice(1),
+            ),
+          )
         })
-        .filter(idPath => j(idPath.parentPath).isOfType(j.CallExpression))
-        .forEach(idPath => j(idPath).replaceWith(getScreenMemberExpression(j, importedName)))
 
-      hasScreenTransformations = hasScreenTransformations || !!transformedNodes.size()
+      hasWithinTransformation = !!transformedNodes.size()
 
       j(path).remove()
-    })
 
-  if (hasScreenTransformations) {
-    // Remove empty imports
-    root
-      .find(j.ImportDeclaration)
-      .filter(path => !!path.value.source.value?.toString().startsWith(RTL_MODULES_PREFIX))
-      .filter(path => !path.value.specifiers.length)
-      .forEach(path => j(path).remove())
-  }
-
-  // Check screen.* methods parameters
-  root
-    .find(
-      j.CallExpression,
-      {
-        callee: {
-          type: 'MemberExpression',
-          object: {
-            type: 'Identifier',
-            name: SCREEN_OBJECT_NAME,
-          },
-          property: {
-            type: 'Identifier',
-          },
-        },
-      },
-    )
-    .filter(path => RTL_QUERY_METHODS.includes(
-      ((path.value.callee as MemberExpression).property as Identifier).name,
-    ))
-    .filter(path => path.value.arguments.length === 2)
-    .filter(path => {
-      // Some screen.* methods accepts more than one argument
-      // but these are objects or undefined
-      const secondArgument = path.value.arguments[1]
-      return j(secondArgument).isOfType(j.StringLiteral)
-        || j(secondArgument).isOfType(j.RegExpLiteral)
-    })
-    .forEach(path => {
-      const methodName = ((path.value.callee as MemberExpression).property as Identifier).name
-      const args = path.value.arguments
-      j(path).replaceWith(
-        j.callExpression(
-          j.memberExpression(
-            j.callExpression(j.identifier(WITHIN_METHOD_NAME), [args[0]]),
-            j.identifier(methodName),
-          ),
-          args.slice(1),
-        ),
-      )
-      hasWithinTransformation = true
+      const declaration = path.parentPath.parentPath.value as ImportDeclaration
+      if (!declaration.specifiers.length) {
+        j(path.parentPath.parentPath).remove()
+      }
     })
 
   // Check if file still has screen usages (all could be replaced with within())
@@ -312,14 +276,7 @@ const transform: Transform = (fileInfo, api, options: TransformOptions) => {
     insertImport(j, root, RTL_SOURCE_MODULE, WITHIN_METHOD_NAME, APPEND_RTL_IMPORT_AFTER_MODULE)
   }
 
-  return prettier.format(root.toSource(), {
-    parser: 'typescript',
-    singleQuote: true,
-    semi: false,
-    trailingComma: 'all',
-    printWidth: 90,
-    arrowParens: 'avoid',
-  })
+  return root.toSource()
 }
 
 export const parser = 'tsx'

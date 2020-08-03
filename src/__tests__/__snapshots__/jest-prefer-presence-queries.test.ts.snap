@@ -15,7 +15,8 @@ it('test', () => {
   expect(a.b.getByText('id')).toBeTruthy()
   expect(a.b.getByRole('id')).toBeInTheDocument()
   expect(a.b.getByLabelText('id')).toBeDefined()
-})"
+})
+"
 `;
 
 exports[`Use queryBy in falsy queries 1`] = `
@@ -33,5 +34,6 @@ it('test', () => {
   expect(a.b.queryByText('id')).toBeFalsy()
   expect(a.b.queryByRole('id')).not.toBeInTheDocument()
   expect(a.b.queryByLabelText('id')).not.toBeDefined()
-})"
+})
+"
 `;

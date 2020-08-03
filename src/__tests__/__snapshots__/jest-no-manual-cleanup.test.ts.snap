@@ -6,22 +6,26 @@ import { render, screen } from '@testing-library/react'
 
 afterEach(() => {
   foo()
-})"
+})
+"
 `;
 
 exports[`Remove 'cleanup' call in non-lifecycle method 1`] = `
 "// @ts-nocheck
 import { render, screen } from '@testing-library/react'
 
-it('test', () => {})"
+it('test', () => {})
+"
 `;
 
 exports[`Remove lifecycle method call if 'cleanup' is the only call in callback 1`] = `
 "// @ts-nocheck
-import { render, screen } from '@testing-library/react'"
+import { render, screen } from '@testing-library/react'
+"
 `;
 
 exports[`Remove lifecycle method call if 'cleanup' is used as argument 1`] = `
 "// @ts-nocheck
-import { screen } from '@testing-library/react'"
+import { screen } from '@testing-library/react'
+"
 `;

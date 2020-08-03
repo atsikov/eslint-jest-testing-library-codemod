@@ -8,8 +8,9 @@ import { screen, within } from '@testing-library/react'
 it('test', () => {
   const { container } = render(<A />)
   expect(within(container).getByText('text')).toBeInTheDocument()
-  expect(screen.getByText('text')).toBeInTheDocument()
-})"
+  expect(screen.getByTestId('id')).toBeInTheDocument()
+})
+"
 `;
 
 exports[`Add rtl import after react 1`] = `
@@ -21,17 +22,19 @@ import { screen } from '@testing-library/react'
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Add screen to existing rtl import 1`] = `
 "// @ts-nocheck
-import { within, screen } from '@testing-library/react'
+import { foo, screen } from '@testing-library/react'
 
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).not.toBeNull()
-})"
+})
+"
 `;
 
 exports[`Handled named destructure 1`] = `
@@ -40,16 +43,18 @@ exports[`Handled named destructure 1`] = `
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).not.toBeNull()
-})"
+})
+"
 `;
 
 exports[`Handled named imports 1`] = `
-"import { screen } from '@testing-library/react'
+"import { within } from '@testing-library/react'
 
 it('test', () => {
   render(<A />)
-  expect(screen.getByText('text')).not.toBeNull()
-})"
+  expect(within(container).getByText('text')).not.toBeNull()
+})
+"
 `;
 
 exports[`Keep multiple parameters if second is not string or regexp 1`] = `
@@ -62,7 +67,8 @@ it('test', () => {
   render(<A />)
   expect(screen.getByText(container, options)).toBeInTheDocument()
   expect(screen.getByText(container, undefined, options)).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Keep non empty destructure 1`] = `
@@ -71,7 +77,8 @@ exports[`Keep non empty destructure 1`] = `
 it('test', () => {
   const { container } = render(<div />)
   expect(screen.getByText('text')).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Keep non query methods imports 1`] = `
@@ -81,7 +88,8 @@ import { screen, within } from '@testing-library/react'
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Keep object properties with rtl query names 1`] = `
@@ -90,7 +98,8 @@ import React from 'react'
 
 it('test', () => {
   expect(obj.getByText('textA')).not.toBeNull()
-})"
+})
+"
 `;
 
 exports[`Keep render result var if other props than queries used 1`] = `
@@ -103,7 +112,8 @@ it('test', () => {
   const rendered = render(<A />)
   expect(screen.getByText('text')).toBeInTheDocument()
   rendered.foo
-})"
+})
+"
 `;
 
 exports[`Keep shadowed variables 1`] = `
@@ -120,7 +130,8 @@ it('test', () => {
     const rendered = render(<A />)
     expect(rendered.foo('text')).toBeInTheDocument()
   })
-})"
+})
+"
 `;
 
 exports[`Remove destructure and unused global var 1`] = `
@@ -129,7 +140,8 @@ exports[`Remove destructure and unused global var 1`] = `
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Remove destructure and unused local var 1`] = `
@@ -138,7 +150,8 @@ exports[`Remove destructure and unused local var 1`] = `
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Remove empty destructure 1`] = `
@@ -148,7 +161,8 @@ it('test', () => {
   render({ foo: true })
 
   expect(screen.getByTestId('foo')).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Replace render result value usages 1`] = `
@@ -160,7 +174,8 @@ import { screen } from '@testing-library/react'
 it('test', () => {
   render(<A />)
   expect(screen.getByText('text')).toBeInTheDocument()
-})"
+})
+"
 `;
 
 exports[`Transform query with more than one parameter to within 1`] = `
@@ -172,5 +187,6 @@ it('test', () => {
   const { container } = render(<A />)
   expect(within(container).getByText('text')).toBeInTheDocument()
   expect(within(container).getByText(/text/)).toBeInTheDocument()
-})"
+})
+"
 `;

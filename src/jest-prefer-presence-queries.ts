@@ -5,7 +5,6 @@ import {
   MemberExpression,
   CallExpression,
 } from 'jscodeshift'
-import prettier from 'prettier'
 
 const JEST_TRUTHY_ASSERTIONS = [
   '.not.toBeNull',
@@ -145,14 +144,7 @@ const transform: Transform = (fileInfo, api) => {
       }
     })
 
-  return prettier.format(root.toSource(), {
-    parser: 'typescript',
-    singleQuote: true,
-    semi: false,
-    trailingComma: 'all',
-    printWidth: 90,
-    arrowParens: 'avoid',
-  })
+  return root.toSource()
 }
 
 export const parser = 'tsx'

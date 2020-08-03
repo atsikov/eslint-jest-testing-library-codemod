@@ -3,7 +3,6 @@ import {
   Transform,
   CallExpression,
 } from 'jscodeshift'
-import prettier from 'prettier'
 import { getDeclarationScopePath, getParentScopePath, removeUnusedImport } from './utils'
 import { hasImport } from './helpers'
 
@@ -85,14 +84,7 @@ const transform: Transform = (fileInfo, api) => {
     removeUnusedImport(j, root.paths()[0], CLEANUP_FUNCTION)
   }
 
-  return prettier.format(root.toSource(), {
-    parser: 'typescript',
-    singleQuote: true,
-    semi: false,
-    trailingComma: 'all',
-    printWidth: 90,
-    arrowParens: 'avoid',
-  })
+  return root.toSource()
 }
 
 export const parser = 'tsx'

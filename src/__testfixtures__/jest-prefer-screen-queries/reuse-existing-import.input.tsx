@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { getByText, within } from '@testing-library/react'
+import { foo } from '@testing-library/react'
 
 it('test', () => {
-  render(<A />)
+  const { getByText } = render(<A />)
   expect(getByText('text')).not.toBeNull()
 })
