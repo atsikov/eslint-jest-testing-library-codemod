@@ -1,6 +1,10 @@
 # eslint-jest-testing-library-codemod
 
-**eslint-jest-testing-library-codemod** provides a set of autofixes to make migration to [eslint-plugin-testing-library](https://github.com/testing-library/eslint-plugin-testing-library) ruleset less painful.
+**eslint-jest-testing-library-codemod** provides a set of autofixes to make migration to [eslint-plugin-testing-library](https://github.com/testing-library/eslint-plugin-testing-library) ruleset less painful. Codemod is based on [jscodeshift](https://github.com/facebook/jscodeshift).
+
+## Usage
+`yarn transform <path to folder>`
+Codemod will pick all js,jsx,ts,tsx files, ignoring node_modules. All [jscodeshift](https://github.com/facebook/jscodeshift) params could be passed as well.
 
 ## Fixers
 
