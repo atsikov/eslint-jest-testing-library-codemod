@@ -1,6 +1,6 @@
 # eslint-jest-testing-library-codemod
 
-**eslint-jest-testing-library-codemod** prvides a set of autofixees to make migration to [eslint-plugin-testing-library](https://github.com/testing-library/eslint-plugin-testing-library) ruleset less painful.
+**eslint-jest-testing-library-codemod** provides a set of autofixes to make migration to [eslint-plugin-testing-library](https://github.com/testing-library/eslint-plugin-testing-library) ruleset less painful.
 
 ## Fixers
 
