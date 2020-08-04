@@ -1,16 +1,23 @@
 import { Transform } from 'jscodeshift'
 
-import transformPreferScreen from './transforms/prefer-screen-queries'
-import transformPreferPresenceQueries from './transforms/prefer-presence-queries'
-import transformNoManualCleanup from './transforms/no-manual-cleanup'
 import format from './format'
 
 const transform: Transform = (fileInfo, api, options) => {
-  const transforms = [
-    transformPreferScreen,
-    transformPreferPresenceQueries,
-    transformNoManualCleanup,
-  ]
+  const fixers = options.fix
+  if (!fixers) {
+    // eslint-disable-next-line no-console
+    console.error('Fixers list should be provided with --fix argument')
+    process.exit(1)
+  }
+
+  const fixersList: string[] = typeof fixers === 'object' && 'length' in fixers
+    ? fixers
+    : fixers.split(',')
+
+  const transforms = fixersList.map(
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    fixerName => require(`./transforms/${fixerName.trim()}`).default,
+  )
 
   const transformedSource = transforms.reduce((source: string, t) => {
     return t({ ...fileInfo, source }, api, options) || ''

@@ -3,9 +3,30 @@
 **eslint-jest-testing-library-codemod** provides a set of autofixes to make migration to [eslint-plugin-testing-library](https://github.com/testing-library/eslint-plugin-testing-library) ruleset less painful. Codemod is based on [jscodeshift](https://github.com/facebook/jscodeshift).
 
 ## Usage
-`yarn transform <path to folder>`
+```
+yarn transform --fix=<fixer name> --<option>=<value> <path to folder>
+```
+Fixer name is a module name from `src/transforms/`. Fixers could be provided as a comma-separated list or multiple `--fix` arguments.
+
+Available fixers in recommended order:
+```
+prefer-screen-queries
+options:
+  memberExpressions: true
+
+prefer-presence-queries
+
+no-manual-cleanup
+```
 
 Codemod will pick all js, jsx, ts, tsx files, ignoring `node_modules`. [jscodeshift](https://github.com/facebook/jscodeshift) params could be passed as well.
+
+
+## Example
+
+```
+yarn transform --fix=prefer-screen-queries,prefer-presence-queries,no-manual-cleanup ./src
+```
 
 Looks cool, right?
 
