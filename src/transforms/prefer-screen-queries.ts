@@ -9,12 +9,13 @@ import {
   ASTPath,
 } from 'jscodeshift'
 import {
-  getParentScopePath,
-  replaceMethodNames,
   getDeclarationScopePath,
+  getParentScopePath,
+  hasImport,
+  insertImport,
   removeUnusedIdentifierDeclaration,
+  replaceMethodNames,
 } from './utils'
-import { insertImport, hasImport } from './helpers'
 
 export interface TransformOptions extends Options {
   memberExpressions?: boolean | string

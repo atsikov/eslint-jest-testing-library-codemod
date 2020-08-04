@@ -29,7 +29,7 @@ export const snapshotTest = (
 function getInput(moduleName: string): FileInfo {
   const MODULE_EXTS = ['ts', 'tsx']
   const paths = MODULE_EXTS.map(ext =>
-    resolve(__dirname, `./__testfixtures__/${moduleName}.input.${ext}`),
+    resolve(__dirname, `../__testfixtures__/${moduleName}.input.${ext}`),
   )
   const fixturePath = paths.find(path => existsSync(path))
   if (!fixturePath) {

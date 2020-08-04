@@ -1,8 +1,8 @@
 import { Transform } from 'jscodeshift'
 
-import transformPreferScreen from './jest-prefer-screen-queries'
-import transformPreferPresenceQueries from './jest-prefer-presence-queries'
-import transformNoManualCleanup from './jest-no-manual-cleanup'
+import transformPreferScreen from './transforms/prefer-screen-queries'
+import transformPreferPresenceQueries from './transforms/prefer-presence-queries'
+import transformNoManualCleanup from './transforms/no-manual-cleanup'
 import format from './format'
 
 const transform: Transform = (fileInfo, api, options) => {

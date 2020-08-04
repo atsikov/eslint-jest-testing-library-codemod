@@ -1,5 +1,5 @@
-import * as transform from '../jest-prefer-presence-queries'
-import { snapshotTest } from '../testUtils'
+import * as transform from '../prefer-presence-queries'
+import { snapshotTest } from '../utils/testUtils'
 
 snapshotTest(
   transform,

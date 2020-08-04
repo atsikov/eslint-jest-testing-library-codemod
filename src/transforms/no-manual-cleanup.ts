@@ -3,8 +3,12 @@ import {
   Transform,
   CallExpression,
 } from 'jscodeshift'
-import { getDeclarationScopePath, getParentScopePath, removeUnusedImport } from './utils'
-import { hasImport } from './helpers'
+import {
+  getDeclarationScopePath,
+  getParentScopePath,
+  hasImport,
+  removeUnusedImport,
+} from './utils'
 
 const RTL_MODULES_PREFIX = '@testing-library/'
 const CLEANUP_FUNCTION = 'cleanup'

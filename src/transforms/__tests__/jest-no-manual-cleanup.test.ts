@@ -1,5 +1,5 @@
-import * as transform from '../jest-no-manual-cleanup'
-import { snapshotTest } from '../testUtils'
+import * as transform from '../no-manual-cleanup'
+import { snapshotTest } from '../utils/testUtils'
 
 snapshotTest(
   transform,
