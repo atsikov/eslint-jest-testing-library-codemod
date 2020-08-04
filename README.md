@@ -7,6 +7,10 @@
 
 Codemod will pick all js, jsx, ts, tsx files, ignoring `node_modules`. [jscodeshift](https://github.com/facebook/jscodeshift) params could be passed as well.
 
+Looks cool, right?
+
+![Sample transform diff](https://github.com/atsikov/eslint-jest-testing-library-codemod/blob/master/images/sample-transform.png)
+
 ## Fixers
 
 ### prefer-screen-queries
